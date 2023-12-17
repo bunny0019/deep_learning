@@ -1,1 +1,60 @@
-#
+#BCE损失函数
+#用于计算二分类任务的损失函数
+PyTorch提供了两个类来计算二分类交叉熵（Binary Cross Entropy），分别是BCELoss() 和BCEWithLogitsLoss()
+-------------------1--------------------
+torch.nn.BCELoss()
+
+类定义如下
+torch.nn.BCELoss(
+    weight=None,
+    size_average=None,
+    reduction="mean",
+)
+
+数学公式定义：
+用N表示样本数量，Zn表示预测第n个样本为正确样例的概率，yn表示第n个样本的标签
+loss(z,y)=mean{l0,.....,ln-1}
+ln=-(yn*log(Zn)+(1-yn)*log(1-Zn))
+
+对应模型
+LOSS=-(ylog(p(x)+(1-y)log(1-p(x))
+其中p(x)是模型输出，y是真实标签。
+---------------------------1------------------------------
+torch.nn.BCEWithLogitsLoss()
+该类将Sigmoid()和BCELoss()整合起来，比纯粹使用BCELoss()+Sigmoid()数值稳定
+
+类定义如下
+
+torch.nn.BCEWithLogitsLoss(
+    weight=None,
+    size_average=None,
+    reduction="mean",
+    pos_weight=None,
+)
+
+数学公式定义：
+用N表示数量，Zn表示预测第n个样本为正确案例的得分，yn表示为第n个样本的标签，Sig表示sigmoid函数
+loss(z,y)=mean{l0,.....,ln-1}
+ln=-(yn*log(Sig(Zn))+(1-yn)*log(1-Sig(Zn)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
